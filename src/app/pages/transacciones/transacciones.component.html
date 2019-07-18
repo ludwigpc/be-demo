@@ -1,0 +1,78 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <!-- <h4>{{__transaccionService.tipoCuenta}}: {{__transaccionService.nroCuenta}}</h4> -->
+                <h4 #infcuenta></h4>
+            </div>
+        </div>
+        <div class="row animated fadeIn" *ngIf="cargando">
+
+            <div class="col-sm-12">
+                <div class="alert alert-warning text-center">
+                    <strong>Cargando</strong>
+                    <br>
+                    <i class="fa fa-refresh fa-spin fa-2x"></i>
+                    <span>Espere por favor</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="card">
+            <div class="card-body">
+
+                <h3 class="card-tittle">Historial de Transacciones ( <small>{{totalTransacciones}}</small> )</h3>
+
+                <div class="table-responsive m-t-40">
+                    <table id="tablaT" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Transacción</th>
+                                <th>Monto($)</th>
+                                <th>Saldo Contable($)</th>
+                                <th>Saldo Disponible($)</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Transacción</th>
+                                <th>Monto($)</th>
+                                <th>Saldo Contable($)</th>
+                                <th>Saldo Disponible($)</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <!-- <tr *ngFor="let transaccion of transacciones">
+                                <td>
+                                    {{ transaccion.fecha }}
+                                </td>
+                                <td>
+                                    {{ transaccion.hora }}
+                                </td>
+                                <td>
+                                    {{ transaccion.transaccion }}
+                                </td>
+                                <td>
+                                    ${{ transaccion.monto }}
+                                </td>
+                                <td>
+                                    ${{ transaccion.saldoContable }}
+                                </td>
+                                <td>
+                                    ${{ transaccion.saldoDisponible }}
+                                </td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

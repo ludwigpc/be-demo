@@ -1,0 +1,92 @@
+<div class="row animated fadeIn" *ngIf="cargando">
+
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-md-8">
+        <!-- Column -->
+        <div *ngFor="let cuenta of cuentas" class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="d-flex flex-row">
+                    <div class="p-10 bg-info">
+                        <h1 class="text-white box m-b-0"><i class="fa fa-money"></i></h1>
+                    </div>
+                    <div class="align-self-center m-l-20">
+                        <h3 class="m-b-0 text-success">${{ cuenta.sdisp }}</h3>
+                        <h5 class="text-muted m-b-0">Saldo | <a href="">{{ cuenta.nrocuenta }}</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-4">
+        <div class="col-md-6 col-lg-12 col-xlg-2">
+            <div class="card">
+                <div class="box bg-warning text-center">
+                    <h1 class="font-bold text-white">${{totalSaldo}}</h1>
+                    <h6 class="text-white">SALDO TOTAL</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h3 class="card-tittle">Cuentas ( <small>{{totalCuentas}}</small> )</h3>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Cuenta</th>
+                                <th>Tipo</th>
+                                <th>Saldo Contable</th>
+                                <th>Saldo Disponible</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cuenta of cuentas">
+                                <td>
+                                    <a [routerLink]="['/transacciones', cuenta._id]">{{ cuenta.nrocuenta }}</a>
+                                </td>
+                                <td>
+                                    {{ cuenta.tipo }}
+                                </td>
+                                <td align="right">
+                                    ${{ cuenta.scont }}
+                                </td>
+                                <td align="right">
+                                    ${{ cuenta.sdisp }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td align="right">
+                                    TOTAL:
+                                </td>
+                                <td align="right">
+                                    ${{totalSaldo}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

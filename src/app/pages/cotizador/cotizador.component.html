@@ -1,0 +1,100 @@
+<form #f="ngForm" ngNativeValidate (ngSubmit)="generarAmortizacion(f)">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-body marbot">
+                <p class="text-muted m-b-30 font-13"> Modelo del Prestamo </p>
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12">
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tipo de Prestamo:*</label>
+                            <select ngModel name="tipoPrestamo" (ngModelChange)="onChangesPrestamo($event)" class="form-control custom-select" required>
+                                <option value="1">COLECTIVO</option>
+                                <option value="2">CREDI POLIZA</option>
+                                <option value="3">CREDIFLASH</option>
+                                <option value="4">ORDINARIO</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Periodicidad:*</label>
+                            <select ngModel name="periodicidad" (ngModelChange)="onChangesPeriodicidad($event)" class="form-control custom-select" required>
+                                <option value="30">MENSUAL</option>
+                                <option value="15">QUINCENAL</option>
+                                <option value="7">SEMANAL</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-body marbot">
+                <p class="text-muted m-b-30 font-13"> Prestamo </p>
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12">
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Monto:*</label>
+                            <input ngModel #monto class="form-control" type="number" name="monto">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Número de pagos:*</label>
+                            <input ngModel #numPagos class="form-control" type="number" name="numPagos" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12 marbot">
+            <div class="text-right">
+                <button class="btn btn-primary btn-rounded" type="submit">
+                <i class="mdi mdi-plus"></i>  
+                Generar tabla de amortización
+            </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+
+</div>
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+
+            <div class="card-body">
+
+                <h3 class="card-tittle">Tabla de amortización</h3>
+
+                <div class="table-responsive m-t-40">
+                    <table id="tablaT" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Cuota</th>
+                                <th>Saldo de deuda($)</th>
+                                <th>Interes($)</th>
+                                <th>Pago($)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
