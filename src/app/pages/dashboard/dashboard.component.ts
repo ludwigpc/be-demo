@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
   sumarSaldo() {
     this.cuentas.forEach(cuenta => {
 
-      this.totalSaldo += cuenta.sdisp;
+      this.totalSaldo += parseFloat(cuenta.sdisp);
 
     });
   }

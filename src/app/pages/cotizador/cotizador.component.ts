@@ -21,14 +21,14 @@ export class CotizadorComponent implements OnInit {
   @ViewChild ('numPagos', {static: true}) numPagos: ElementRef;
 
   constructor(
-    public _mathServices: MathService
+    //public _mathServices: MathService
   ) { }
 
   ngOnInit() {
   }
 
   generarAmortizacion(f: NgForm) {
-    if ( f.invalid || this.monto.nativeElement.value<50) {
+    if ( f.invalid || this.monto.nativeElement.value < 50) {
       return;
     }
     this.cuotas = [];
@@ -42,13 +42,13 @@ export class CotizadorComponent implements OnInit {
   calcularCuotas(monto: any, numPagos: any) {
     let tasInt = 0.0254;
     let cuota =   monto * ( (Math.pow((1 + tasInt ), numPagos) * tasInt) / (Math.pow((1 + tasInt ), numPagos) - 1) );
-    cuota = this._mathServices.redondear(cuota);
 
     for (let index = 0; index < numPagos; index++) {
-      let interes = monto*0.0254;
-      this.cuota = new Cuota((index+1)+'', this._mathServices.redondear (monto)+'', this._mathServices.redondear(interes)+'', cuota+'');
-      this.totalInteres+=interes;
-      monto=monto-(cuota-interes);
+      let interes = monto * 0.0254;
+      let saldoDeuda = monto;
+      this.cuota = new Cuota((index + 1), (Math.round(monto * Math.pow(10, 2)) / Math.pow(10, 2))+'', interes.toFixed(2), cuota.toFixed(2));
+      this.totalInteres += interes;
+      monto = monto - (cuota - interes);
       this.cuotas.push(this.cuota);
     }
   }
@@ -67,8 +67,8 @@ export class CotizadorComponent implements OnInit {
       },
       data: this.cuotas,
       columns: [
-        { data: 'nrocuota' },
-        { data: 'saldo' },
+        { data: 'nroCuota' },
+        { data: 'saldoDeuda' },
         { data: 'interes' },
         { data: 'pago' }
       ],

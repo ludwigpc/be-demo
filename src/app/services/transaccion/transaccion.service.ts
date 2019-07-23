@@ -41,7 +41,6 @@ export class TransaccionService {
 
     return this.http.post( url, body.toString(), this.httpOptions)
         .map( (resp: any) => {
-          // this.totalHospitales=resp.total;
           // console.log(resp);
           if(resp.length > 0) {
           this.nroCuenta = resp[0].beCuenta.cuenta;
@@ -58,15 +57,11 @@ export class TransaccionService {
     let lista2 = lista.reverse();
 
     lista2.forEach(element => {
-      //console.log(element.monto);
       const date = new Date(element.fechaHoraProceso);
       this.transaccion = new Transaccion(formatDate(date, 'd/M/yy', 'es-ES'), formatDate(date, 'h:mm a', 'es-ES'),
-        element.beSubtipoTransaccion.beTipoTransaccion.tipoTransaccion, this._mathService.redondear(element.monto), 
-        this._mathService.redondear(element.saldoContablePosterior),
-        this._mathService.redondear( element.saldoDisponiblePosterior), element.idTransaccion);
-      // this.transaccion = new Transaccion(element.fechaHoraProceso, element.fechaHoraProceso,
-      //   element.beSubtipoTransaccion.beTipoTransaccion.tipoTransaccion, element.monto, element.saldoContablePosterior,
-      //   element.saldoDisponiblePosterior, element.idTransaccion);
+        element.beSubtipoTransaccion.beTipoTransaccion.tipoTransaccion, element.monto.toFixed(2),
+        element.saldoContablePosterior.toFixed(2),
+        element.saldoDisponiblePosterior.toFixed(2), element.idTransaccion);
       this.transacciones.push(this.transaccion);
     });
   }

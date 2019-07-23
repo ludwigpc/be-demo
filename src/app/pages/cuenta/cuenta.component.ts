@@ -12,9 +12,8 @@ export class CuentaComponent implements OnInit {
   usuario: Usuario;
   genero: string = 'FEMENINO';
   tipoIdentificacion: string = 'CÉDULA';
-
-  lat: number = -23.8779431;
-  lng: number = -49.8046873;
+  lat: number = 0;
+  lng: number = 0;
   zoom: number = 15;
 
   constructor(
@@ -25,13 +24,13 @@ export class CuentaComponent implements OnInit {
     this.usuario = this._usuarioService.usuario;
     this.lat = this.usuario.latitud;
     this.lng = this.usuario.longitud;
-    if(this.usuario.genero) {
+    if (this.usuario.genero) {
       this.genero = 'MASCULINO';
     }
-    if(this.usuario.tippIdentificacion != '1'){
+    console.log(this.usuario.tippIdentificacion);
+    if (this.usuario.tippIdentificacion != '1'){
       this.tipoIdentificacion = "PASAPORTE";
     }
-    // console.log(this._usuarioService.usuario);
   }
 
 }

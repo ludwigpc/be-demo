@@ -12,18 +12,10 @@
                 <b style="line-height: 0px;">
                         <div class="dark-logo svg-logo svg-dark-logo" [inlineSVG]="'assets/images/logo-icon.svg'"></div>           
                         <div class="light-logo svg-logo svg-dark-logo" [inlineSVG]="'assets/images/logo-icon.svg'"></div>
-                <!-- Dark Logo icon -->
-                <!-- <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" /> -->
-                <!-- Light Logo icon -->
-                <!-- <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" /> -->
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text -->
                 <span>
-                <!-- dark Logo text -->
-                <!-- <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" /> -->
-                <!-- Light Logo text -->    
-                <!-- <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" /> -->
                 <div class="dark-logo svg-logo svg-dark-logo-text" [inlineSVG]="'assets/images/logo-text.svg'"></div>
                 <div class="light-logo svg-logo svg-dark-logo-text" [inlineSVG]="'assets/images/logo-text.svg'"></div>
                 </span>
@@ -58,19 +50,22 @@
                 <!-- Profile -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/users/1.jpg" alt="user" class="profile-pic" /></a>
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img [src]="usuario.img | imagen" alt="user" class="profile-pic" />
+
+                    </a>
                     <div class="dropdown-menu dropdown-menu-right animated pulse">
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box">
                                     <div class="u-img">
-                                        <!-- <img src="assets/images/users/1.jpg" alt="user"> -->
                                         <img [src]="usuario.img | imagen" alt="user" class="profile-pic" />
                                     </div>
                                     <div class="u-text">
-                                        <!-- <h4>{{ usuario.nombre }}</h4> -->
                                         <h4>{{_usuarioService.nombrecorto}}</h4>
-                                        <p class="text-muted">{{ usuario.email }}</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                        <p class="text-muted">{{ usuario.email }}</p>
+                                        <a [routerLink]="['/cuenta']" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a>
+                                    </div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>

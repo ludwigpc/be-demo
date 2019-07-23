@@ -28,7 +28,8 @@ export class CuentaService {
     this.cuentas = [];
     let url =URL_WS + '/cuenta/obtenerOcupadoPorCliente';
     let body = new URLSearchParams();
-    
+  
+
 
     body.set('idCliente', this._usuarioService.usuario.id);//id
     body.set('mbAlfa', this._usuarioService.usuario.id);//id
@@ -48,11 +49,9 @@ export class CuentaService {
   filtrarCuentas(lista: any[]) {
 
     lista.forEach(element => {
-      this.cuenta = new Cuenta(element.cuenta, element.beTipoCuenta.tipoCuenta,
-        this._mathService.redondear(element.saldoContable),
-        this._mathService.redondear(element.saldoDisponible),
+      this.cuenta = new Cuenta(element.cuenta, element.beTipoCuenta.tipoCuenta, element.saldoContable.toFixed(2),
+      element.saldoDisponible.toFixed(2),
         element.idCuenta);
-      //console.log(this.cuenta);
       this.cuentas.push(this.cuenta);
     });
   }

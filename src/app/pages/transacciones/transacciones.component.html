@@ -2,8 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <!-- <h4>{{__transaccionService.tipoCuenta}}: {{__transaccionService.nroCuenta}}</h4> -->
-                <h4 #infcuenta></h4>
+                <h4 #infcuenta class="font-bold"></h4>
             </div>
         </div>
         <div class="row animated fadeIn" *ngIf="cargando">
@@ -21,7 +20,7 @@
         <div class="card">
             <div class="card-body">
 
-                <h3 class="card-tittle">Historial de Transacciones ( <small>{{totalTransacciones}}</small> )</h3>
+                <h3 class="card-tittle">Historial de Transacciones ( <small class="font-bold">{{totalTransacciones}}</small> )</h3>
 
                 <div class="table-responsive m-t-40">
                     <table id="tablaT" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
@@ -46,26 +45,6 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                            <!-- <tr *ngFor="let transaccion of transacciones">
-                                <td>
-                                    {{ transaccion.fecha }}
-                                </td>
-                                <td>
-                                    {{ transaccion.hora }}
-                                </td>
-                                <td>
-                                    {{ transaccion.transaccion }}
-                                </td>
-                                <td>
-                                    ${{ transaccion.monto }}
-                                </td>
-                                <td>
-                                    ${{ transaccion.saldoContable }}
-                                </td>
-                                <td>
-                                    ${{ transaccion.saldoDisponible }}
-                                </td>
-                            </tr> -->
                         </tbody>
                     </table>
                 </div>

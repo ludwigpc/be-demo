@@ -1,3 +1,4 @@
+import { Cuota } from './cuota.model';
 export class Prestamo {
 
     constructor(
@@ -7,7 +8,8 @@ export class Prestamo {
         public monto: string,
         public saldo: string,
         public cuota: string,
-        public fechaProximoPago: string,
-        public _id: string
+        public tblAmortizacion: Cuota [],
+        public fechaProximoPago?: string,
+        public _id?: string
     ) { }
 }

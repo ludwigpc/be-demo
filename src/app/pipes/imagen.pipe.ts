@@ -1,36 +1,25 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { URL_SERVICIOS } from '../config/config';
+import { URL_SOCIO } from '../config/config';
 
 @Pipe({
   name: 'imagen'
 })
 export class ImagenPipe implements PipeTransform {
 
-  //transform( img: string, tipo: string = 'usuario', value: any, args?: any): any {
-  transform( img: string, tipo: string = 'usuario'): any {
-    
-    let url = URL_SERVICIOS + '/img';
+  transform( img: string, tipo: string): any  {
 
-    if ( !img ) {
-      return url + '/usuarios/xxx';
+  let url = URL_SOCIO + 'cliente/';
+
+  if ( !img ) {
+      return 'assets/images/users/noimage.jpg';
     }
 
-    if ( img.indexOf('https') >= 0 ){
-      return img;
-    }
-
-    switch ( tipo ) {
-      case 'usuario':
-        url += '/usuarios/' + img;
-        break;
-      default:
-        console.log('tipo de imagen no existe, usuario, medicos, hospitales');
-        url += '/usuarios/xxx';
-        break;
-    }
-    
-    return url;
-    
+  if ( img) {
+     return url + img;
+   } else {
+    return 'assets/images/users/noimage.jpg';
   }
+
+}
 
 }

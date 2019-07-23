@@ -59,3 +59,7 @@
 .marbot {
     margin-bottom: 10px;
 }
+
+#tablaP tbody tr {
+    cursor: pointer;
+}

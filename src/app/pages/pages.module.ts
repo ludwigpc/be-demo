@@ -13,6 +13,8 @@ import { CuentaComponent } from './cuenta/cuenta.component';
 import { AgmCoreModule } from '@agm/core';
 import { GOOGLE_API_KEY } from '../config/config';
 import { TransaccionesComponent } from './transacciones/transacciones.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { PrestamoComponent } from './prestamos/prestamo.component';
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { TransaccionesComponent } from './transacciones/transacciones.component'
         InversionesComponent,
         CotizadorComponent,
         CuentaComponent,
-        TransaccionesComponent
+        TransaccionesComponent,
+        PrestamoComponent
     ],
     exports: [
         DashboardComponent,
@@ -33,6 +36,7 @@ import { TransaccionesComponent } from './transacciones/transacciones.component'
         SharedModule,
         PAGES_ROUTES,
         FormsModule,
+        PipesModule,
         AgmCoreModule.forRoot({
             apiKey: GOOGLE_API_KEY
           })

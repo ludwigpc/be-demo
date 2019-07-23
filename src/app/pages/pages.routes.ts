@@ -8,6 +8,7 @@ import { PrestamosComponent } from './prestamos/prestamos.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
 import { TransaccionesComponent } from './transacciones/transacciones.component';
 import { LoginGuardGuard } from '../services/guards/login-guard.guard';
+import { PrestamoComponent } from './prestamos/prestamo.component';
 
 
 const pagesRoutes: Routes = [
@@ -22,7 +23,8 @@ const pagesRoutes: Routes = [
     { path: 'inversiones', component: InversionesComponent, data: {titulo: 'Inversiones'}},
     { path: 'cotizador-prestamos', component: CotizadorComponent, data: {titulo: 'Cotizador de prestamos'}},
     { path: 'cuenta', component: CuentaComponent, data: {titulo: 'Mi Cuenta'}},
-    { path: 'transacciones/:id', component: TransaccionesComponent, data: {titulo: 'Mi Cuenta | Transacciones'}},
+    { path: 'transacciones/:id', component: TransaccionesComponent, data: {titulo: 'Transacciones'}},
+    { path: 'prestamo', component: PrestamoComponent, data: {titulo: 'Prestamo'}},
     { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
 
 ];

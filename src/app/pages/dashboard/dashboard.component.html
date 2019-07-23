@@ -12,31 +12,19 @@
 </div>
 
 <div class="row animated fadeIn" *ngIf="!cargando">
-    <div class="col-md-8">
-        <!-- Column -->
-        <div *ngFor="let cuenta of cuentas" class="col-lg-6 col-md-6">
-            <div class="card">
-                <div class="d-flex flex-row">
-                    <div class="p-10 bg-info">
-                        <h1 class="text-white box m-b-0"><i class="fa fa-money"></i></h1>
-                    </div>
-                    <div class="align-self-center m-l-20">
-                        <h3 class="m-b-0 text-success">${{ cuenta.sdisp }}</h3>
-                        <h5 class="text-muted m-b-0">Saldo | <a href="">{{ cuenta.nrocuenta }}</a></h5>
+    <div *ngFor="let cuenta of cuentas" class="col-lg-4">
+        <div class="card bg-info text-white">
+            <a [routerLink]="['/transacciones', cuenta._id]">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="stats">
+                            <h1 class="text-white">{{cuenta.sdisp | currency}}</h1>
+                            <h6 class="text-white">Saldo | {{cuenta.tipo}}</h6>
+                        </div>
+                        <div class="stats-icon text-right ml-auto"><i class="fa fa-dollar display-5 op-3 text-dark"></i></div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- Column -->
-    <div class="col-md-4">
-        <div class="col-md-6 col-lg-12 col-xlg-2">
-            <div class="card">
-                <div class="box bg-warning text-center">
-                    <h1 class="font-bold text-white">${{totalSaldo}}</h1>
-                    <h6 class="text-white">SALDO TOTAL</h6>
-                </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>
@@ -66,21 +54,21 @@
                                 <td>
                                     {{ cuenta.tipo }}
                                 </td>
-                                <td align="right">
-                                    ${{ cuenta.scont }}
+                                <td>
+                                    {{ cuenta.scont | currency }}
                                 </td>
-                                <td align="right">
-                                    ${{ cuenta.sdisp }}
+                                <td>
+                                    {{ cuenta.sdisp | currency }}
                                 </td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td></td>
-                                <td align="right">
+                                <td>
                                     TOTAL:
                                 </td>
-                                <td align="right">
-                                    ${{totalSaldo}}
+                                <td>
+                                    {{totalSaldo | currency}}
                                 </td>
                             </tr>
                         </tbody>
