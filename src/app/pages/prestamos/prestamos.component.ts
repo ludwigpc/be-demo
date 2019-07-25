@@ -68,9 +68,7 @@ export class PrestamosComponent implements OnInit {
   }
 
   someClickHandler(info: any): void {
-    // console.log(info.tblAmortizacion + ' - ' + info.monto);
     this._prestamoService.prestamo = info;
-    // this._prestamoService.prestamo.tblAmortizacion = info.tblAmortizacion;
     this.router.navigate(['/prestamo']);
   }
 

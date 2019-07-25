@@ -17,6 +17,7 @@ export class CotizadorComponent implements OnInit {
   tipoPrestamo: any;
   periodicidad: any = 1;
   totalInteres: any;
+  montoMaximo: string = '50';
   @ViewChild ('monto', {static: true}) monto: ElementRef;
   @ViewChild ('numPagos', {static: true}) numPagos: ElementRef;
 
@@ -96,7 +97,7 @@ export class CotizadorComponent implements OnInit {
         numPagos  = 0;
         break;
     }
-    this.numPagos.nativeElement.value = numPagos;
+    this.numPagos.nativeElement.value = numPagos.toFixed(0);
   }
   onChangesPrestamo( newValue: any ) {
     this.tipoPrestamo = newValue;
