@@ -41,7 +41,8 @@ export class TransaccionService {
 
     return this.http.post( url, body.toString(), this.httpOptions)
         .map( (resp: any) => {
-          // console.log(resp);
+          console.log('hola');
+          console.log(resp);
           if(resp.length > 0) {
           this.nroCuenta = resp[0].beCuenta.cuenta;
           this.tipoCuenta= resp[0].beCuenta.beTipoCuenta.tipoCuenta;

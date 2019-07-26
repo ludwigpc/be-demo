@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Cuota } from '../../models/cuota.model';
 import { NgForm } from '@angular/forms';
-import { MathService } from '../../services/services.index';
+import { delay } from 'q';
 declare var $: any;
 
 @Component({
@@ -17,21 +17,34 @@ export class CotizadorComponent implements OnInit {
   tipoPrestamo: any;
   periodicidad: any = 1;
   totalInteres: any;
-  montoMaximo: string = '50';
+  montoMaximo: number = 0;
+  errorMonto: boolean = false;
+  infprestamo: boolean = true;
+  errortipoPrestamo: boolean = false;
   @ViewChild ('monto', {static: true}) monto: ElementRef;
   @ViewChild ('numPagos', {static: true}) numPagos: ElementRef;
+  @ViewChild ('periodicidad_cbx', {static: true}) periodicidad_cbx: ElementRef;
+  @ViewChild ('tipoPrestamo_cbx', {static: true}) tipoPrestamo_cbx: ElementRef;
 
   constructor(
-    //public _mathServices: MathService
+    
   ) { }
 
   ngOnInit() {
+    this.tipoPrestamo_cbx.nativeElement.selectedIndex = 0;
+    this.tipoPrestamo_cbx.nativeElement[0].selected = true;
+    this.periodicidad_cbx.nativeElement.disabled = true;
+    this.monto.nativeElement.disabled = true;
   }
 
+
   generarAmortizacion(f: NgForm) {
-    if ( f.invalid || this.monto.nativeElement.value < 50) {
+    if (this.tipoPrestamo==0 || !this.tipoPrestamo) {
+      this.errortipoPrestamo = true;
+      this.infprestamo = false;
       return;
     }
+    this.errortipoPrestamo = false;
     this.cuotas = [];
     $("#tablaT").dataTable().fnDestroy();
     this.cargando = true;
@@ -46,7 +59,6 @@ export class CotizadorComponent implements OnInit {
 
     for (let index = 0; index < numPagos; index++) {
       let interes = monto * 0.0254;
-      let saldoDeuda = monto;
       this.cuota = new Cuota((index + 1), (Math.round(monto * Math.pow(10, 2)) / Math.pow(10, 2))+'', interes.toFixed(2), cuota.toFixed(2));
       this.totalInteres += interes;
       monto = monto - (cuota - interes);
@@ -55,7 +67,6 @@ export class CotizadorComponent implements OnInit {
   }
 
   formatearTabla() {
-
     $('#tablaT').DataTable({
       dom: 'Bfrtip',
       buttons: [
@@ -101,26 +112,50 @@ export class CotizadorComponent implements OnInit {
   }
   onChangesPrestamo( newValue: any ) {
     this.tipoPrestamo = newValue;
-    let monto = 0;
+    if (!this.tipoPrestamo) {
+      this.infprestamo = false;
+      this.errortipoPrestamo = true;
+      return;
+    }
+    this.infprestamo = false;
+    this.periodicidad_cbx.nativeElement.disabled = false;
+    this.monto.nativeElement.disabled = false;
+    // let monto = 0;
     switch (newValue) {
       case '1':
-        monto = 500;
+        // monto = 500;
+        this.montoMaximo = 500;
         break;
       case '2':
-        monto = 5000;
+        // monto = 5000;
+        this.montoMaximo = 5000;
         break;
       case '3':
-        monto = 50;
+        // monto = 50;
+        this.montoMaximo = 50;
         break;
       case '4':
-        monto = 500;
+        // monto = 500;
+        this.montoMaximo = 500;
         break;
       default:
-        monto = 0;
+        // monto = 0;
+        this.montoMaximo = 0;
         break;
     }
-    this.monto.nativeElement.value = monto;
-    this.onChangesPeriodicidad(this.periodicidad);
+    // this.montoMaximo = monto;
+    this.monto.nativeElement.value = this.montoMaximo;
+    this.periodicidad_cbx.nativeElement.selectedIndex = 0;
+    this.onChangesPeriodicidad(30);
+  }
+
+  onChangesMonto( newValue: any) {
+    if (this.monto.nativeElement.value > this.montoMaximo) {
+      this.errorMonto = true;
+      this.monto.nativeElement.value = this.montoMaximo;
+    } else {
+      this.errorMonto = false;
+    }
   }
 
  

@@ -63,3 +63,8 @@
 #tablaP tbody tr {
     cursor: pointer;
 }
+
+.btn-principal {
+    background-color: #23BFD4;
+    border-color: #23BFD4;
+}

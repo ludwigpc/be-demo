@@ -27,7 +27,7 @@ export class CuentaComponent implements OnInit {
     if (this.usuario.genero) {
       this.genero = 'MASCULINO';
     }
-    console.log(this.usuario.tippIdentificacion);
+    //console.log(this.usuario.tippIdentificacion);
     if (this.usuario.tippIdentificacion != '1'){
       this.tipoIdentificacion = "PASAPORTE";
     }

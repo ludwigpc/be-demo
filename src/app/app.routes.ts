@@ -18,7 +18,7 @@ const appRoutes: Routes = [
         component: PagesComponent,
         canActivate: [ LoginGuardGuard ],
         loadChildren: './pages/pages.module#PagesModule'
-    },    
+    },
     { path: '**', component: NopagefoundComponent}
 ];
 

@@ -7,18 +7,17 @@
                     <div class="col-sm-12 col-xs-12">
 
                         <div class="form-group">
-                            <label>Tipo de Prestamo:*</label>
-                            <select class="custom-select col-12" name="tipoPrestamo" (ngModelChange)="onChangesPrestamo($event)" ngModel>
-                                        <option selected="0">Seleccione una opción...</option>
-                                        <option value="1">COLECTIVO</option>
+                            <label>Tipo de Prestamo:* <span *ngIf="infprestamo" class="text-info">Seleccione una opción</span> <code *ngIf="errortipoPrestamo">Debe seleccionar una opción</code></label>
+                            <select #tipoPrestamo_cbx class="custom-select col-12" name="tipoPrestamo" (ngModelChange)="onChangesPrestamo($event)" ngModel="">
+                                <option value="1">COLECTIVO</option>
                                 <option value="2">CREDI POLIZA</option>
                                 <option value="3">CREDIFLASH</option>
                                 <option value="4">ORDINARIO</option>
-                                    </select>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Periodicidad:*</label>
-                            <select ngModel name="periodicidad" (ngModelChange)="onChangesPeriodicidad($event)" class="form-control custom-select" required>
+                            <select ngModel #periodicidad_cbx name="periodicidad" (ngModelChange)="onChangesPeriodicidad($event)" class="form-control custom-select" required>
                                 <option value="30">MENSUAL</option>
                                 <option value="15">QUINCENAL</option>
                                 <option value="7">SEMANAL</option>
@@ -34,12 +33,12 @@
                 <div class="row">
                     <div class="col-sm-12 col-xs-12">
                         <div class="form-group">
-                            <label>Monto:* <code>El monto máximo es {{montoMaximo}}</code></label>
-                            <input ngModel #monto class="form-control" type="number" name="monto">
+                            <label>Monto:* <code *ngIf="errorMonto">El monto máximo es {{montoMaximo}}</code></label>
+                            <input ngModel #monto class="form-control" type="number" name="monto" (ngModelChange)="onChangesMonto($event)">
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Número de pagos:*</label>
-                            <input ngModel #numPagos class="form-control" type="number" name="numPagos" readonly>
+                        <div class=" form-group ">
+                            <label for="exampleInputEmail1 ">Número de pagos:*</label>
+                            <input ngModel #numPagos class="form-control " type="number " name="numPagos " readonly>
                         </div>
                     </div>
                 </div>
@@ -48,11 +47,11 @@
     </div>
 
 
-    <div class="row">
-        <div class="col-12 marbot">
-            <div class="text-right">
-                <button class="btn btn-primary btn-rounded" type="submit">
-                <i class="mdi mdi-plus"></i>  
+    <div class="row ">
+        <div class="col-12 marbot ">
+            <div class="text-right ">
+                <button class="btn btn-primary btn-principal" type="submit">
+                <i class="mdi mdi-table"></i>  
                 Generar tabla de amortización
             </button>
             </div>
@@ -60,25 +59,26 @@
     </div>
 </form>
 
-<div class="row animated fadeIn" *ngIf="cargando">
 
-    <div class="col-sm-12">
-        <div class="alert alert-warning text-center">
+<div class="row animated fadeIn " *ngIf="cargando ">
+
+    <div class="col-sm-12 ">
+        <div class="alert alert-warning text-center ">
             <strong>Cargando</strong>
             <br>
-            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <i class="fa fa-refresh fa-spin fa-2x "></i>
             <span>Espere por favor</span>
         </div>
     </div>
 
 </div>
-<div class="row animated fadeIn" *ngIf="!cargando">
-    <div class="col-12">
-        <div class="card">
+<div class="row animated fadeIn " *ngIf="!cargando ">
+    <div class="col-12 ">
+        <div class="card ">
 
-            <div class="card-body">
+            <div class="card-body ">
 
-                <h3 class="card-tittle">Tabla de amortización</h3>
+                <h3 class="card-tittle ">Tabla de amortización</h3>
 
                 <div class="table-responsive m-t-40">
                     <table id="tablaT" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
@@ -90,6 +90,14 @@
                                 <th>Pago($)</th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Cuota</th>
+                                <th>Saldo de deuda($)</th>
+                                <th>Interes($)</th>
+                                <th>Pago($)</th>
+                            </tr>
+                        </tfoot>
                         <tbody>
                         </tbody>
                     </table>

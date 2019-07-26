@@ -11,6 +11,7 @@ import { throwError } from 'rxjs';
 import { formatDate } from '@angular/common';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -84,6 +85,7 @@ export class UsuarioService {
           user.clave, user.direccion, user.referencia, user.genero, user.idTipoIdentificacion,
           formatDate(date, 'd/M/yyyy', 'es-ES'),
           user.latitud, user.longitud, user.idCliente);
+          
         this.guardarStorage( resp.beCliente.secretoAutenticacion, usuario);
         //console.log( resp );
             return true;
