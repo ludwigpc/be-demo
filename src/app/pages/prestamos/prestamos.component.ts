@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PrestamoService } from '../../services/prestamo/prestamo.service';
-import { Prestamo } from '../../../../be-demo/src/app/models/prestamo.model';
+import { Prestamo } from '../../models/prestamo.model';
 import { Router } from '@angular/router';
 declare var $: any;
 
@@ -50,9 +50,18 @@ export class PrestamosComponent implements OnInit {
         { data: 'estado' },
         { data: 'cuenta' },
         { data: 'tipo' },
-        { data: 'monto' },
-        { data: 'saldo' },
-        { data: 'cuota' },
+        {
+          data: 'monto',
+          render: $.fn.dataTable.render.number( ',', '.', 2, '$' )
+        },
+        {
+          data: 'saldo',
+          render: $.fn.dataTable.render.number( ',', '.', 2, '$' )
+        },
+        {
+          data: 'cuota',
+          render: $.fn.dataTable.render.number( ',', '.', 2, '$' )
+        },
         { data: 'fechaProximoPago' }
       ],
       ordering: false,

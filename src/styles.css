@@ -68,3 +68,8 @@
     background-color: #23BFD4;
     border-color: #23BFD4;
 }
+
+.btn-regresar {
+    float: right;
+    padding-bottom: 1.1em;
+}

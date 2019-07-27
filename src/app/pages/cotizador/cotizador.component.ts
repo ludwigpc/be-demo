@@ -80,9 +80,18 @@ export class CotizadorComponent implements OnInit {
       data: this.cuotas,
       columns: [
         { data: 'nroCuota' },
-        { data: 'saldoDeuda' },
-        { data: 'interes' },
-        { data: 'pago' }
+        {
+          data: 'saldoDeuda',
+          render: $.fn.dataTable.render.number( ',', '.', 2, '$' )
+        },
+        {
+          data: 'interes',
+          render: $.fn.dataTable.render.number( ',', '.', 2, '$' )
+        },
+        {
+          data: 'pago',
+          render: $.fn.dataTable.render.number( ',', '.', 2, '$' )
+        }
       ],
       ordering: false
       });

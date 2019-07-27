@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Prestamo } from '../../models/prestamo.model';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { URL_WS } from '../../config/config';
+import { HttpClient } from '@angular/common/http';
+import { URL_WS, httpOptions } from '../../config/config';
 //import { MathService } from '../../../../be-demo/src/app/services/math/math.service';
 import { formatDate } from '@angular/common';
 import { Cuota } from '../../models/cuota.model';
@@ -14,10 +14,6 @@ export class PrestamoService {
 
   prestamo: Prestamo;
   prestamos: Prestamo [] = [];
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/x-www-form-urlencoded'
-    })};
 
   constructor(
     public http: HttpClient,
@@ -28,13 +24,14 @@ export class PrestamoService {
     this.prestamos = [];
     let url =URL_WS + '/prestamo/porCliente';
     let body = new URLSearchParams();
+
     body.set('idCliente', this._usuarioService.usuario.id);//id
     body.set('mbAlfa', this._usuarioService.usuario.id);//id
     body.set('mbBeta', this._usuarioService.usuario.clave);//clave
     body.set('mbTeta', '6');
     body.set('mbOmega', '1');
 
-    return this.http.post( url, body.toString(), this.httpOptions)
+    return this.http.post( url, body.toString(), httpOptions)
         .map( (resp: any) => {
           //console.log(resp);
           this.filtrarPrestamos(resp);
@@ -57,9 +54,11 @@ export class PrestamoService {
       });
 
       const date = formatDate(new Date(element.fechaHoraDesembolso), 'dd/MM/yyyy', 'es-ES');
+      console.log(date);
       this.prestamo = new Prestamo(element.estado, element.beCuenta.beTipoCuenta.tipoCuenta, element.beTipoPrestamo.tipoPrestamo,
         element.monto.toFixed(2), element.saldoPendiente.toFixed(2), element.listaTablaAmortizacion[0].pagoReal.toFixed(2),
         cuotas, date, element.idPrestamo);
+        console.log(this.prestamo);
 
       this.prestamos.push(this.prestamo);
     });

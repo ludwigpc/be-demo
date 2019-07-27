@@ -14,6 +14,7 @@ export class TransaccionesComponent implements OnInit {
   transacciones: Transaccion [] = [];
   cargando: boolean = true;
   totalTransacciones: number = 0;
+  totalSaldo: number = 0;
   @ViewChild ('infcuenta', {static: true}) infcuenta: ElementRef;
 
 
@@ -27,31 +28,26 @@ export class TransaccionesComponent implements OnInit {
 
       if ( id !== 'nuevo' ) {
         this.cargarTransacciones( id );
-
+        
       }
     });
   }
 
   ngOnInit() {
-    // console.log(this.infcuenta);
+    
   }
 
   cargarTransacciones( id: string ) {
     this.cargando = true;
     this._transaccionService.cargarTransacciones( id )
         .subscribe( (resp: any) => {
-          // console.log( resp );
-          if(resp){
-
+          this.cargando = false;
+          if (resp) {
             this.totalTransacciones = resp.length;
             this.transacciones = resp;
-            // console.log(this.totalCuentas);
-            this.cargando = false;
             this.formatearTabla();
-            
-            this.infcuenta.nativeElement.innerHTML = this._transaccionService.tipoCuenta + ': ' + this._transaccionService.nroCuenta;
-          }else{
-            this.cargando = false;
+            this.totalSaldo = this.transacciones[0].saldoDisponible;
+          } else {
             this.infcuenta.nativeElement.innerHTML = 'Sin transacciones';
           }
         });
@@ -74,9 +70,18 @@ export class TransaccionesComponent implements OnInit {
         { data: 'fecha' },
         { data: 'hora' },
         { data: 'transaccion' },
-        { data: 'monto' },
-        { data: 'saldoContable' },
-        { data: 'saldoDisponible' }
+        {
+          data: 'monto',
+          render: $.fn.dataTable.render.number( ',', '.', 2, '$' )
+        },
+        {
+          data: 'saldoContable',
+          render: $.fn.dataTable.render.number( ',', '.', 2, '$' )
+        },
+        {
+          data: 'saldoDisponible',
+          render: $.fn.dataTable.render.number( ',', '.', 2, '$' )
+        }
       ],
       ordering: false
       });

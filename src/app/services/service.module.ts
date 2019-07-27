@@ -3,6 +3,7 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import localeES from "@angular/common/locales/es";
 
+
 registerLocaleData(localeES, "es");
 import {
   UsuarioService,
@@ -10,7 +11,7 @@ import {
   TransaccionService,
   CuentaService,
   PrestamoService,
-  MathService,
+  InversionesService,
   LoginGuardGuard,
   LogoutGuard
 } from './services.index';
@@ -27,7 +28,7 @@ import {
     CuentaService,
     TransaccionService,
     PrestamoService,
-    MathService,
+    InversionesService,
     LoginGuardGuard,
     LogoutGuard
   ]

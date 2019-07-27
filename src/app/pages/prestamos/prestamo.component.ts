@@ -39,13 +39,13 @@ export class PrestamoComponent implements OnInit {
       },
       data: this._prestamoService.prestamo.tblAmortizacion,
       columns: [
-        { data: 'nroCuota' },
-        { data: 'saldoDeuda' },
-        { data: 'pago' },
-        { data: 'abonoCapital' },
-        { data: 'interes' },
-        { data: 'saldo' },
-        { data: 'pagoReal' }
+        { data: 'nroCuota'},
+        { data: 'saldoDeuda', render: $.fn.dataTable.render.number( ',', '.', 2, '$' )},
+        { data: 'pago',render: $.fn.dataTable.render.number( ',', '.', 2, '$' ) },
+        { data: 'abonoCapital',render: $.fn.dataTable.render.number( ',', '.', 2, '$' ) },
+        { data: 'interes',render: $.fn.dataTable.render.number( ',', '.', 2, '$' ) },
+        { data: 'saldo',render: $.fn.dataTable.render.number( ',', '.', 2, '$' ) },
+        { data: 'pagoReal',render: $.fn.dataTable.render.number( ',', '.', 2, '$' ) }
       ],
       ordering: false
       });

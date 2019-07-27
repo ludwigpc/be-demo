@@ -2,39 +2,66 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+                <div class="d-flex no-block">
+                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/expense.png" alt="Income" /></div>
+                    <div class="align-self-center">
+                        <h6 class="text-muted m-t-10 m-b-0">Total saldo generado</h6>
+                        <h2 class="m-t-0">{{totalSaldoGenerado | currency}}</h2>
+                    </div>
 
-                <h3 class="card-tittle">Inversiones ( <small>1</small> )</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row animated fadeIn" *ngIf="cargando">
 
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Fecha de Inicio</th>
-                            <th>Plazo</th>
-                            <th>Monto</th>
-                            <th>Interés Generado</th>
-                            <th>Fecha de Liquidación</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- <tr *ngFor="let medico of medicos">
-                            <td class="w70">
-                                <img [src]="medico.img | imagen:'medico'" class="img-50">
-                            </td>
-                            <td>
-                                {{ medico.nombre }}
-                            </td>
-                        </tr> -->
-                        <tr>
-                            <td>10/08/2020</td>
-                            <td>2 meses</td>
-                            <td>$100.00</td>
-                            <td>$50.00</td>
-                            <td>10/08/2020</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="text-right">
-                    <label class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Total: $50.00</label>
+            <div class="col-sm-12">
+                <div class="alert alert-warning text-center">
+                    <strong>Cargando</strong>
+                    <br>
+                    <i class="fa fa-refresh fa-spin fa-2x"></i>
+                    <span>Espere por favor</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="card">
+            <div class="card-body">
+
+                <h3 class="card-tittle">Inversiones ( <small class="font-bold">{{totalPolizas}}</small> )</h3>
+
+                <div class="table-responsive m-t-40">
+                    <table id="tablaT" class="table color-table muted-table" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Fecha de Inicio</th>
+                                <th>Fecha de Liquidación</th>
+                                <th>Monto</th>
+                                <th>Plazo</th>
+                                <th>Interés Generado</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr *ngFor="let poliza of polizas">
+                                <td>
+                                    {{ poliza.fechaInicio}}
+                                </td>
+                                <td>
+                                    {{ poliza.fechaLiquidacion }}
+                                </td>
+                                <td>
+                                    {{ poliza.monto | currency }}
+                                </td>
+                                <td>
+                                    {{ poliza.plazo }}
+                                </td>
+                                <td>
+                                    {{ poliza.interesGenerado | currency }}
+                                </td>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { URL_WS } from '../../config/config';
+import { HttpClient } from '@angular/common/http';
+import { URL_WS, httpOptions } from '../../config/config';
 import {Md5} from 'ts-md5/dist/md5';
 
 import 'rxjs/add/operator/map';
@@ -19,11 +19,7 @@ export class UsuarioService {
 
   usuario: Usuario;
   token: string;
-  nombrecorto:string;
-  httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/x-www-form-urlencoded'
-      })};
+  nombrecorto: string;
 
   constructor(
     public http: HttpClient,
@@ -75,7 +71,7 @@ export class UsuarioService {
     body.set('usuario', usuario.usuario);
     body.set('clave', usuario.clave);
     
-    return this.http.post( url, body.toString(), this.httpOptions)
+    return this.http.post( url, body.toString(), httpOptions)
     .map( (resp: any) => {
       if (resp.success) {
         //grabar en el localStorage

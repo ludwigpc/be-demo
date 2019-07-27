@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Cuenta } from '../../models/cuenta.model';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { URL_WS } from '../../config/config';
+import { HttpClient } from '@angular/common/http';
+import { URL_WS, httpOptions } from '../../config/config';
 import { UsuarioService } from '../usuario/usuario.service';
-import { MathService } from '../math/math.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +12,9 @@ export class CuentaService {
   cuenta: Cuenta;
   cuentas: Cuenta [] = [];
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/x-www-form-urlencoded'
-    })};
-
   constructor(
     public http: HttpClient,
-    public _usuarioService: UsuarioService,
-    public _mathService: MathService
+    public _usuarioService: UsuarioService
   ) { }
 
   cargarCuentas() {
@@ -36,7 +29,7 @@ export class CuentaService {
     body.set('mbTeta', '6');
     body.set('mbOmega', '1');
 
-    return this.http.post( url, body.toString(), this.httpOptions)
+    return this.http.post( url, body.toString(), httpOptions)
         .map( (resp: any) => {
           // console.log(resp);
           this.filtrarCuentas(resp);
